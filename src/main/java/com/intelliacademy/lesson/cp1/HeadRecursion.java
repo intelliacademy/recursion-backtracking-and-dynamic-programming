@@ -6,6 +6,12 @@ public class HeadRecursion {
      *  it is called tail recursion
      */
     public static void main(String[] args) {
+        execute(10);
+    }
 
+    public static void execute(int n){
+        if (n == 0) return;
+        execute(n - 1);
+        System.out.println("Something to it " + n);
     }
 }
