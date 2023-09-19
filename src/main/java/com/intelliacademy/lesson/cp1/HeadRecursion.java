@@ -9,6 +9,9 @@ public class HeadRecursion {
         execute(10);
     }
 
+    /**
+     * Son əməliyyatın nəticəsinə ehtiyac vardır.
+     */
     public static void execute(int n){
         if (n == 0) return;
         execute(n - 1);

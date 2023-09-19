@@ -9,6 +9,9 @@ public class TailRecursion {
         execute(10);
     }
 
+    /**
+     * Son əməliyyatın nəticəsinə ehtiyac yoxdur.
+     */
     public static void execute(int n){
         if (n == 0) return;
         System.out.println("Something to it " + n);
