@@ -11,6 +11,7 @@ public class HeadRecursion {
 
     /**
      * Son əməliyyatın nəticəsinə ehtiyac vardır.
+     * Daha cox resursa ehtiyaci vardir cunki state saxlayir
      */
     public static void execute(int n){
         if (n == 0) return;

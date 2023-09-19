@@ -11,6 +11,8 @@ public class TailRecursion {
 
     /**
      * Son əməliyyatın nəticəsinə ehtiyac yoxdur.
+     * Daha cox memorye ehtiyaci yoxdurş Cunki state saxlamir.
+     * While ve ya for loop evezi isledile biler
      */
     public static void execute(int n){
         if (n == 0) return;
