@@ -1,4 +1,4 @@
-package com.intelliacademy.lesson.cp1;
+package com.intelliacademy.recursion.lesson.cp1;
 
 public class Euclidean {
     public int iterable(int a, int b) {
