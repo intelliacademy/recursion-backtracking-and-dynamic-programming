@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="recursion-backtracking-and-dynamic-programming" />
+        <module name="stackFrameCalling-backtracking-and-dynamic-programming" />
       </profile>
     </annotationProcessing>
   </component>
