@@ -19,7 +19,7 @@ public class TowersOfHanoi {
 class TowersOfHanoiMain{
     public static void main(String[] args) {
         TowersOfHanoi towersOfHanoi=new TowersOfHanoi();
-        towersOfHanoi.solve(10,'A','B','C');
+        towersOfHanoi.solve(10,'A','C','B');
     }
 }
 
