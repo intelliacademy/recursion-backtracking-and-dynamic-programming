@@ -1,6 +1,6 @@
 package com.intelliacademy.recursion.lesson.cp4;
 
-public class EvenAndOdd {
+public class EvenAndOddProblem {
     public boolean isEven(int number){
         return (number ^ 1) == number + 1;
     }
@@ -10,9 +10,9 @@ public class EvenAndOdd {
 }
 class EvenAndOddTest{
     public static void main(String[] args) {
-        EvenAndOdd evenAndOdd = new EvenAndOdd();
-        System.out.println(evenAndOdd.isEven(51));
-        System.out.println(evenAndOdd.isOdd(51));
+        EvenAndOddProblem evenAndOddProblem = new EvenAndOddProblem();
+        System.out.println(evenAndOddProblem.isEven(51));
+        System.out.println(evenAndOddProblem.isOdd(51));
     }
 
 }
