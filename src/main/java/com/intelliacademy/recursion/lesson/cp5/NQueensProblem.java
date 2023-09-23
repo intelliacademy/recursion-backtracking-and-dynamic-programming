@@ -82,31 +82,48 @@ class ChessTable{
     }
 
     public void placeQueen(int row, int column){
+        System.out.println("Placing queen at: " + this.columns[column] + (row + 1));
         this.table[row][column] = '■';
     }
 
     public void removeQueen(int row, int column){
+        System.out.println("Removing queen from: " + this.columns[column] + (row + 1));
         this.table[row][column] = '□';
     }
 
-    public boolean isSafe(int row, int column){
-        for (int i = 0; i < column; i++) {
-            if (this.table[row][i] == '■') {
-                return false;
-            }
-        }
-        for (int i = row, j = column; i >= 0 && j >= 0; i--, j--) {
-            if (this.table[i][j] == '■') {
-                return false;
-            }
-        }
 
+    public boolean isSafe(int row, int column){
+        if (column == queens) return true;
+        else if (isSafeSameRow(row, column)) return false;
+        else if (isSafeDiagonalLeftToRight(row, column)) return false;
+        else if (isSafeDiagonalRightToLeft(row, column)) return false;
+        else return true;
+    }
+
+    private boolean isSafeDiagonalRightToLeft(int row, int column) {
         for (int i = row, j = column; i < this.size && j >= 0; i++, j--) {
             if (this.table[i][j] == '■') {
                 return false;
             }
         }
-        return true;
+        return false;
+    }
+    private boolean isSafeDiagonalLeftToRight(int row, int column) {
+        for (int i = row, j = column; i >= 0 && j >= 0; i--, j--) {
+            if (this.table[i][j] == '■') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isSafeSameRow(int row, int column) {
+        for (int i = 0; i < column; i++) {
+            if (this.table[row][i] == '■') {
+                return true;
+            }
+        }
+        return false;
     }
 
 
