@@ -17,7 +17,11 @@ public class NQueensProblem {
         this.chessTable.printTable();
     }
     public void solve() {
-
+        if (this.chessTable.setQueen(0)) {
+            printTable();
+        } else {
+            System.out.println("No solution found...");
+        }
     }
 }
 
@@ -27,8 +31,10 @@ class ChessTable{
     private char[][] table;
     private int size;
 
+    private int queens;
+
     public static ChessTable of(int size){
-        var table =  new ChessTable(size + 1);
+        var table =  new ChessTable(size);
         table.init();
         return table;
     }
@@ -43,12 +49,13 @@ class ChessTable{
 
     private ChessTable(int size){
         this.size = size;
-        this.table = new char[size][size];
+        this.table = new char[size + 1][size + 1];
+        this.queens = size;
     }
 
     public void printTable(){
-        for(int i = 0; i < this.size; i++){
-            for(int j = 0; j < this.size; j++){
+        for(int i = 0; i <= this.size; i++){
+            for(int j = 0; j <= this.size; j++){
                 if (i == 0 && j == 0)
                     System.out.print("  ");
                 else if (i == 0)
@@ -56,10 +63,22 @@ class ChessTable{
                 else if (j == 0)
                     System.out.print(this.rows[i - 1] + " ");
                 else
-                    System.out.print(this.table[i][j] + " ");
+                    System.out.print(this.table[i - 1][j - 1] + " ");
             }
             System.out.println();
         }
+    }
+
+    public boolean setQueen(int column){
+        if(column == this.size) return true;
+        for(int row = 0; row < this.queens; row++){
+            if(isSafe(row, column)){
+                this.placeQueen(row, column);
+                if(this.setQueen(column + 1)) return true;
+                else this.removeQueen(row, column);
+            }
+        }
+        return false;
     }
 
     public void placeQueen(int row, int column){
@@ -71,22 +90,31 @@ class ChessTable{
     }
 
     public boolean isSafe(int row, int column){
-        return this.table[row][column] == '□';
+        for (int i = 0; i < column; i++) {
+            if (this.table[row][i] == '■') {
+                return false;
+            }
+        }
+        for (int i = row, j = column; i >= 0 && j >= 0; i--, j--) {
+            if (this.table[i][j] == '■') {
+                return false;
+            }
+        }
+
+        for (int i = row, j = column; i < this.size && j >= 0; i++, j--) {
+            if (this.table[i][j] == '■') {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public int getSize(){
-        return this.size;
-    }
-
-    public char[][] getTable(){
-        return this.table;
-    }
 
 }
 
 class NQueensProblemTest{
     public static void main(String[] args) {
         NQueensProblem nQueensProblem = NQueensProblem.of(8);
-        nQueensProblem.printTable();
+        nQueensProblem.solve();
     }
 }
