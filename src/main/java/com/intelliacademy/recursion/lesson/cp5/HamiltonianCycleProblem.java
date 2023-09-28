@@ -15,6 +15,7 @@ public class HamiltonianCycleProblem {
 
 
     public void solve() {
+        hamiltonianPath[0] = 0;
         if (findFeasibleSolution(1)) {
             showHamiltonianPath();
         } else {
@@ -23,18 +24,58 @@ public class HamiltonianCycleProblem {
     }
 
     private void showHamiltonianPath() {
-
+        System.out.println("Hamiltonian cycle exists: ");
+        for (int i = 0; i < hamiltonianPath.length; i++) {
+            System.out.print(hamiltonianPath[i] + " ");
+        }
+        System.out.println(hamiltonianPath[0]);
     }
 
-    private boolean findFeasibleSolution(int i) {
+    private boolean findFeasibleSolution(int position) {
+        if (position == this.vertices) return adjacencyMatrix[hamiltonianPath[position-1]][hamiltonianPath[0]] == 1;
+        for (int vertexIndex = 1; vertexIndex < this.vertices; vertexIndex++) {
+            if (isValid(vertexIndex, position)) {
+                hamiltonianPath[position] = vertexIndex;
+                if (findFeasibleSolution(position + 1)) {
+                    return true;
+                }
+                //backtrack
+            }
+        }
         return false;
     }
+
+    private boolean isValid(int vertex, int actualPosition) {
+        //first criterion: whether two nodes are connected?
+        if (adjacencyMatrix[hamiltonianPath[actualPosition - 1]][vertex] == 0) {
+            return false;
+        }
+        //second criterion: whether we have visited it or not?
+        for (int i = 0; i < actualPosition; i++) {
+            if (hamiltonianPath[i] == vertex) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 
 }
 
 class HamiltonianCycleProblemTest{
-    public static void main(String[] args) {
+    private static int[][] matrix = {
+            {0,1,0,0,0,1},
+            {1,0,1,0,0,0},
+            {0,1,0,0,1,0},
+            {0,0,0,0,1,1},
+            {0,0,1,1,0,1},
+            {1,0,0,1,1,0}
+    };
 
+    public static void main(String[] args) {
+        HamiltonianCycleProblem hamiltonianCycleProblem = new HamiltonianCycleProblem(matrix);
+        hamiltonianCycleProblem.solve();
     }
 
 }
